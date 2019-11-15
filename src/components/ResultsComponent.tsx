@@ -54,16 +54,27 @@ export class ResultsComponent extends React.Component<Props, State> {
     }
     render() {
         let listItems = this.state.books.map((book) => {
-            return  <View key={book.id}>
-                        <Text onPress={() => this.props.goToBook(book, this.state.books)}>{book.title}</Text>
+            return  <View key={book.id} style={styles.row}>
+                        <Text onPress={() => this.props.goToBook(book, this.state.books)}
+                            style={styles.title}
+                            >
+                            {book.title}
+                        </Text>
+                        <View style={styles.author}>
+                            <Text onPress={() => this.props.goToBook(book, this.state.books)}> by {book.authors}</Text>
+                        </View>
                     </View>
         })
             
         return (
             <View style={styles.root}>
-                <Button title="Return" onPress={() => this.props.return()}/>
-                <Text>Term: {this.state.term}</Text>
-                {listItems}
+                <View style={styles.header}>
+                    <Button title="Return" onPress={() => this.props.return()}/>
+                    <Text style={styles.term}>Term: {this.state.term}</Text>
+                </View>
+                <View style={styles.rowWrapper}>
+                    {listItems}
+                </View>
             </View>
         )
     }
@@ -74,5 +85,29 @@ const styles = StyleSheet.create({
     root: {
       alignItems: 'center',
       alignSelf: 'center',
+    },
+    header: {
+    },
+    term:{
+        fontSize: 20
+    },
+    rowWrapper: {
+        maxHeight: 600,
+        margin: 10
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        paddingBottom: 3,
+        borderBottomWidth: 1,
+    },
+    title: {
+        fontSize: 20
+    },
+    author: {
+        fontSize: 12,
+        marginLeft: 10,
     }
+
 });

@@ -16,7 +16,7 @@ export class SearchComponent extends React.Component<Props, State> {
     constructor(props: Props){
         super(props);
         this.state = {
-            term: "",
+            term: "Undertale",
             books: []
         }
     }
@@ -29,11 +29,13 @@ export class SearchComponent extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.root}>
-                <Text>Google Books</Text>
-                <View style={styles.textInput}>
+                <Text style={styles.header}>Google Books</Text>
+                <View>
                     <TextInput 
                         placeholder="Book Name"
+                        value={this.state.term}
                         onChangeText={(text) => this.updateTerm(text)}
+                        style={styles.textInput}
                         ></TextInput>
                 </View>
                 <View style={styles.buttons}>
@@ -49,13 +51,18 @@ export class SearchComponent extends React.Component<Props, State> {
 // styles
 const styles = StyleSheet.create({
     root: {
-      alignItems: 'flex-start',
-      alignSelf: 'flex-start',
+      alignItems: 'baseline',
+      alignSelf: 'baseline',
       textAlignVertical: 'top',
       margin: 10
     },
+    header: {
+        fontSize: 50,
+        marginBottom: 10
+    },
     textInput: {
-
+        fontSize: 30,
+        marginBottom: 10
     },
     buttons: {
       flexDirection: 'row',
@@ -64,6 +71,6 @@ const styles = StyleSheet.create({
       alignSelf: 'flex-start',
     },
     button: {
-      flex: 1
+      flex: 1,
     }
   });

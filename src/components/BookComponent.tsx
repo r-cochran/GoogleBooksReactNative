@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View, Image } from 'react-native';
+import { StyleSheet, Button, Text, View, Image, Linking } from 'react-native';
 import { Book } from '../model/book';
 
 export interface Props {
@@ -18,6 +18,15 @@ export class BookComponent extends React.Component<Props, State> {
             book: props.book
         }
     }
+    previewBook(): void {
+        Linking.canOpenURL(this.state.book.previewLink).then(supported => {
+            if (supported) {
+              Linking.openURL(this.state.book.previewLink);
+            } else {
+              console.log("Don't know how to open URI: " + this.state.book.previewLink);
+            }
+        });
+    }
     render() {
         let book: Book = this.state.book;
         return (
@@ -35,6 +44,7 @@ export class BookComponent extends React.Component<Props, State> {
                 <Text>Average Rating: {book.averageRating}</Text>
                 <Text>Price: {book.price}</Text>
                 <Text>Type: {book.printType}</Text>
+                <Button title="Preview" onPress={() => this.previewBook()}/>
             </View>
         )
     }

@@ -36,6 +36,7 @@ export class ResultsComponent extends React.Component<Props, State> {
         book.averageRating = json.volumeInfo.averageRating;
         book.thumbnail = (json.volumeInfo.imageLinks) ? json.volumeInfo.imageLinks.smallThumbnail : '';
         book.price = (json.volumeInfo.saleInfo) ? json.volumeInfo.saleInfo.retailPrice.amount : '';
+        book.previewLink = json.volumeInfo.previewLink;
         return book;
     }
     getResults() {

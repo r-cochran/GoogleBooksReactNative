@@ -9,4 +9,5 @@ export class Book {
     printType: string;
     averageRating: string;
     price: string;
+    previewLink: string;
 }
